@@ -15,6 +15,8 @@ const PLUGIN_NAME: &str = "tcp";
 pub fn init<R: Runtime>() -> TauriPlugin<R> {
     Builder::new(PLUGIN_NAME)
         .invoke_handler(tauri::generate_handler![
+            commands::bind,
+            commands::unbind,
             commands::connect,
             commands::disconnect,
             commands::send
