@@ -1,0 +1,23 @@
+[package]
+name = "tauri-plugin-tcp"
+version = "0.1.0"
+authors = [ "kuyoonjo" ]
+description = "TCP Socket for Tauri App"
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/kuyoonjo/tauri-plugin-tcp"
+keywords = ["tauri", "plugin", "tcp"]
+exclude = ["/examples", "/webview-dist", "/webview-src", "node_modules"]
+readme = "README.md"
+links = "tauri-plugin-tcp"
+
+[build-dependencies]
+tauri-plugin = { version = "2.0.0-beta.16", features = ["build"] }
+
+[dependencies]
+tauri = { version = "2.0.0-beta.20" }
+serde = "1.0"
+thiserror = "1.0"
+tokio = { version = "1.37.0", features = [] }
+lazy_static = "1.4.0"
+debug_print = "1.0.0"

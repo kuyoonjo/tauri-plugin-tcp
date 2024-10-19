@@ -1,0 +1,4 @@
+"$schema" = "schemas/schema.json"
+[default]
+description = "Allows All"
+permissions = ["allow-connect", "allow-disconnect", "allow-send"]

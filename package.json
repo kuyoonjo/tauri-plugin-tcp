@@ -1,0 +1,24 @@
+{
+  "name": "@kuyoonjo/tauri-plugin-tcp",
+  "version": "0.1.0",
+  "author": "kuyoonjo",
+  "description": "",
+  "type": "module",
+  "files": [
+    "webview-dist"
+  ],
+  "main": "webview-dist/index.js",
+  "types": "webview-dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "pnpm build",
+    "pretest": "pnpm build"
+  },
+  "devDependencies": {
+    "typescript": "5.4.5"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "2.0.0-beta.12",
+    "buffer": "^6.0.3"
+  }
+}

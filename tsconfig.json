@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "strict": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "declaration": true,
+    "outDir": "webview-dist",
+    "rootDir": "webview-src",
+    "moduleResolution": "Bundler",
+    "module": "ES2020"
+  },
+  "include": ["webview-src/index.ts"]
+}
