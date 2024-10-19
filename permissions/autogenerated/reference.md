@@ -2,6 +2,8 @@
 
 Allows All
 
+- `allow-bind`
+- `allow-unbind`
 - `allow-connect`
 - `allow-disconnect`
 - `allow-send`
