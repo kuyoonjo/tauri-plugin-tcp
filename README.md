@@ -23,16 +23,53 @@ tauri::Builder::default()
 
 ### javascript
 ```javascript
-import { connect, disconnect, send } from "@kuyoonjo/tauri-plugin-tcp";
-import { listen } from "@tauri-apps/api/event";
+import { connect, disconnect, send, listen } from "@kuyoonjo/tauri-plugin-tcp";
 
-const id = 'unique-id';
-await bind(id, '0.0.0.0:8080');
-await send(id, '192.168.1.2:9090', 'hello');
-await unbind(id);
+// Server side
+const sid = 'unique-server-id';
+await bind(sid, '0.0.0.0:8080');
+await send(sid, '192.168.1.2:9090', 'hello');
+let clientAddr = '';
+await listen((x) => {
+  console.log(x.payload);
+  if (x.payload.id === sid && x.payload.event.connect) {
+    clientAddr = x.payload.event.connect;
+    await send(sid, 'hello', clientAddr);
+  }
+});
+await unbind(sid);
 
-await listen("plugin://tcp", (x) => console.log(x.payload));
+// Client side
+const cid = 'unique-client-id';
+await connect(cid, '0.0.0.0:8080');
+await listen((x) => {
+  console.log(x.payload);
+  if (x.payload.id === cid && x.payload.event.message) {
+    // npm i buffer
+    // import { Buffer } from 'buffer';
+    let str = Buffer.from(x.payload.event.message.data).toString();
+    if (str === 'hello')
+      await send(cid, 'world');
+  }
+});
+await disconnect(cid);
+```
 
+#### Event Payload Interface
+```typescript
+export interface Payload {
+  id: string;
+  event: {
+    bind?: string;
+    unbind?: [];
+    connect?: string;
+    disconnect?: string;
+    message?: {
+      addr: string;
+      data: number[];
+    };
+  };
+}
 ```
 
 ### permissions

@@ -58,7 +58,7 @@
   onMount(() => {
     tcp.listen((x) => {
       console.log(x.payload);
-      if(x.payload.id === "xxx" && x.payload.event.connect) {
+      if (x.payload.id === "xxx" && x.payload.event.connect) {
         clientAddr = x.payload.event.connect;
       }
     });
