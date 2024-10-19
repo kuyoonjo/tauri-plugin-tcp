@@ -55,12 +55,15 @@ export async function send(id: string, message: string | number[], addr?: string
   await invoke('plugin:tcp|send', {
     id,
     message: typeof message === 'string' ? Array.from(Buffer.from(message)) : message,
+    addr,
   });
 }
 
 export interface Payload {
   id: string;
   event: {
+    bind?: string;
+    unbind?: [];
     connect?: string;
     disconnect?: string;
     message?: {

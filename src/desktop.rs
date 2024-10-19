@@ -119,6 +119,14 @@ pub async fn bind<R: Runtime>(
     }
 
     let listener = TcpListener::bind(&endpoint).await?;
+    let _ = window.app_handle().emit_to(
+        window.label(),
+        "plugin://tcp",
+        Payload {
+            id: id.clone(),
+            event: PayloadEvent::Bind(endpoint.to_string()),
+        },
+    );
     debug_println!("{} tcp server listening on {}", &id, &endpoint);
     let socks: Arc<RwLock<HashMap<String, Mutex<(OwnedWriteHalf, JoinHandle<()>)>>>> =
         Arc::new(RwLock::new(HashMap::new()));
@@ -190,7 +198,7 @@ pub async fn bind<R: Runtime>(
     Ok(())
 }
 
-pub async fn unbind(id: String) -> io::Result<()> {
+pub async fn unbind<R: Runtime>(window: tauri::Window<R>, id: String) -> io::Result<()> {
     let mut sockets = SOCKETS.write().await;
 
     if let Some(s) = sockets.get(&id) {
@@ -201,6 +209,14 @@ pub async fn unbind(id: String) -> io::Result<()> {
             s.task.abort();
             sockets.remove(&id);
             debug_println!("{} tcp server closed.", &id);
+            let _ = window.app_handle().emit_to(
+                window.label(),
+                "plugin://tcp",
+                Payload {
+                    id: id.clone(),
+                    event: PayloadEvent::Unbind(),
+                },
+            );
         }
         Ok(())
     } else {

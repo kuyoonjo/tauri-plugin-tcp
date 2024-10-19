@@ -46,6 +46,58 @@ Denies the bind command without any pre-configured scope.
 <tr>
 <td>
 
+`tcp:allow-connect`
+
+</td>
+<td>
+
+Enables the connect command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`tcp:deny-connect`
+
+</td>
+<td>
+
+Denies the connect command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`tcp:allow-disconnect`
+
+</td>
+<td>
+
+Enables the disconnect command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`tcp:deny-disconnect`
+
+</td>
+<td>
+
+Denies the disconnect command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
 `tcp:allow-send`
 
 </td>

@@ -28,6 +28,10 @@ pub(crate) struct Payload {
 
 #[derive(Serialize, Deserialize, Clone)]
 pub(crate) enum PayloadEvent {
+  #[serde(rename = "bind")]
+  Bind(String),
+  #[serde(rename = "unbind")]
+  Unbind(),
   #[serde(rename = "connect")]
   Connect(String),
   #[serde(rename = "disconnect")]
