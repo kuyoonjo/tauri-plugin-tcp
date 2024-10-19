@@ -1,6 +1,6 @@
 [package]
 name = "tauri-plugin-tcp"
-version = "0.1.0"
+version = "0.1.1"
 authors = [ "kuyoonjo" ]
 description = "TCP Socket for Tauri App"
 edition = "2021"

@@ -57,6 +57,7 @@ pub async fn connect<R: Runtime>(
                             event: PayloadEvent::Disconnect(addr.to_string()),
                         },
                     );
+                    SOCKETS.write().await.remove(&tcp_id);
                     break;
                 }
                 debug_println!("{:?} bytes received from {:?}", len, addr);

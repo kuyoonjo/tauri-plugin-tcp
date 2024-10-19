@@ -40,7 +40,7 @@ export async function connect(id: string, endpoint: string) {
  * @param id A unique ID
  */
 export async function disconnect(id: string) {
-  await invoke('plugin:tcp|connect', {
+  await invoke('plugin:tcp|disconnect', {
     id
   });
 }
