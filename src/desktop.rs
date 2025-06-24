@@ -1,4 +1,6 @@
 use std::{collections::HashMap, sync::Arc};
+use socket2::{Socket, Domain, Type};
+use std::net::{SocketAddr, ToSocketAddrs};
 
 use debug_print::debug_println;
 use lazy_static::lazy_static;
@@ -75,6 +77,100 @@ pub async fn connect<R: Runtime>(
             }
         }
         ()
+    });
+
+    sockets.insert(
+        id,
+        Tcp {
+            task,
+            kind: TcpKind::Client {
+                write_half,
+                endpoint,
+            },
+        },
+    );
+    Ok(())
+}
+
+pub async fn connect_with_bind<R: Runtime>(
+    window: tauri::Window<R>,
+    id: String,
+    local_addr: String,   // 本地绑定地址（如：192.168.1.100:0）
+    endpoint: String,      // 远端连接地址（如：example.com:1234）
+) -> io::Result<()> {
+    let mut sockets = SOCKETS.write().await;
+
+    if let Some(s) = sockets.get(&id) {
+        s.task.abort();
+        sockets.remove(&id);
+        sleep(time::Duration::from_millis(100)).await;
+    }
+
+    let local_addr = local_addr
+        .to_socket_addrs()?
+        .next()
+        .ok_or_else(|| io::Error::new(io::ErrorKind::InvalidInput, "invalid local_addr"))?;
+    let remote_addr = endpoint
+        .to_socket_addrs()?
+        .next()
+        .ok_or_else(|| io::Error::new(io::ErrorKind::InvalidInput, "invalid endpoint"))?;
+
+    // 使用 socket2 手动创建 socket 并绑定本地地址
+    let socket = Socket::new(Domain::for_address(remote_addr), Type::STREAM, None)?;
+    socket.bind(&local_addr.into())?;
+
+    // Windows 兼容性处理：connect 时用阻塞模式，之后再转非阻塞交给 tokio
+    socket.set_nonblocking(false)?;
+    socket.connect(&remote_addr.into())?;
+    socket.set_nonblocking(true)?;
+
+    let stream = TcpStream::from_std(socket.into())?;
+    let (mut read_half, write_half) = stream.into_split();
+
+    debug_println!("{} tcp connected to {} from {}", &id, &endpoint, &local_addr);
+
+    let _ = window.app_handle().emit_to(
+        window.label(),
+        "plugin://tcp",
+        Payload {
+            id: id.clone(),
+            event: PayloadEvent::Connect(endpoint.to_string()),
+        },
+    );
+
+    let tcp_id = id.clone();
+    let addr = endpoint.clone();
+    let write_half = Mutex::new(write_half);
+    let task = tokio::task::spawn(async move {
+        let mut buf = [0; 65535];
+        loop {
+            if let Ok(len) = read_half.read(&mut buf).await {
+                if len == 0 {
+                    let _ = window.app_handle().emit_to(
+                        window.label(),
+                        "plugin://tcp",
+                        Payload {
+                            id: tcp_id.clone(),
+                            event: PayloadEvent::Disconnect(addr.to_string()),
+                        },
+                    );
+                    SOCKETS.write().await.remove(&tcp_id);
+                    break;
+                }
+                debug_println!("{:?} bytes received from {:?}", len, addr);
+                let _ = window.app_handle().emit_to(
+                    window.label(),
+                    "plugin://tcp",
+                    Payload {
+                        id: tcp_id.clone(),
+                        event: PayloadEvent::Message {
+                            addr: addr.to_string(),
+                            data: buf[..len].to_vec(),
+                        },
+                    },
+                );
+            }
+        }
     });
 
     sockets.insert(

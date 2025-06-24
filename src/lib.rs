@@ -18,6 +18,7 @@ pub fn init<R: Runtime>() -> TauriPlugin<R> {
             commands::bind,
             commands::unbind,
             commands::connect,
+            commands::connect_with_bind,
             commands::disconnect,
             commands::send
         ])

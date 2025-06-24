@@ -319,6 +319,18 @@
           "markdownDescription": "Denies the connect command without any pre-configured scope."
         },
         {
+          "description": "Enables the connect_with_bind command without any pre-configured scope.",
+          "type": "string",
+          "const": "allow-connect-with-bind",
+          "markdownDescription": "Enables the connect_with_bind command without any pre-configured scope."
+        },
+        {
+          "description": "Denies the connect_with_bind command without any pre-configured scope.",
+          "type": "string",
+          "const": "deny-connect-with-bind",
+          "markdownDescription": "Denies the connect_with_bind command without any pre-configured scope."
+        },
+        {
           "description": "Enables the disconnect command without any pre-configured scope.",
           "type": "string",
           "const": "allow-disconnect",
@@ -355,10 +367,10 @@
           "markdownDescription": "Denies the unbind command without any pre-configured scope."
         },
         {
-          "description": "Allows All\n#### This default permission set includes:\n\n- `allow-bind`\n- `allow-unbind`\n- `allow-connect`\n- `allow-disconnect`\n- `allow-send`",
+          "description": "Allows All\n#### This default permission set includes:\n\n- `allow-bind`\n- `allow-unbind`\n- `allow-connect`\n- `allow-connect-with-bind`\n- `allow-disconnect`\n- `allow-send`",
           "type": "string",
           "const": "default",
-          "markdownDescription": "Allows All\n#### This default permission set includes:\n\n- `allow-bind`\n- `allow-unbind`\n- `allow-connect`\n- `allow-disconnect`\n- `allow-send`"
+          "markdownDescription": "Allows All\n#### This default permission set includes:\n\n- `allow-bind`\n- `allow-unbind`\n- `allow-connect`\n- `allow-connect-with-bind`\n- `allow-disconnect`\n- `allow-send`"
         }
       ]
     }

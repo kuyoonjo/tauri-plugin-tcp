@@ -35,6 +35,12 @@ export async function connect(id: string, endpoint: string) {
   });
 }
 
+export async function connect_with_bind(id: string, localAddr:string, endpoint: string) {
+  await invoke('plugin:tcp|connect_with_bind', {
+    id, localAddr, endpoint,
+  });
+}
+
 /**
  * 
  * @param id A unique ID
@@ -51,7 +57,7 @@ export async function disconnect(id: string) {
  * @param message A string or a uint8 array
  * @param addr Optional destination address. e.g. 0.0.0.0:8080
  */
-export async function send(id: string, message: string | number[], addr?: string) {
+export async function send(id: string, message: string | number[] | Uint8Array, addr?: string) {
   await invoke('plugin:tcp|send', {
     id,
     message: typeof message === 'string' ? Array.from(Buffer.from(message)) : message,

@@ -9,8 +9,10 @@ interface TcpMsg extends tcp.Payload {
 const mode = ref("server")
 
 const server_addr = ref("0.0.0.0:12345")
-const client_addr = ref("0.0.0.0:23456")
+const local_addr = ref("")
 const remote_addr = ref("")
+
+const bind_local = ref(false)
 
 const recv_msg = ref("")
 const send_msg = ref("")
@@ -46,7 +48,11 @@ async function start_tcp_server() {
 }
 
 async function start_tcp_client() {
-  tcp.connect("tcp_client", server_addr.value)
+  if (bind_local.value) {
+    tcp.connect_with_bind("tcp_client", local_addr.value, server_addr.value)
+  } else {
+    tcp.connect("tcp_client", server_addr.value)
+  }
   let unlisten = await listen("plugin://tcp", async (event) => {
         const payload = event.payload as TcpMsg;
         if (payload.id != "tcp_client") {
@@ -75,7 +81,7 @@ async function start_tcp_client() {
 
 async function send() {
   if (!started.value) {
-     return
+    return
   }
   if (mode.value == "server") {
     console.log("send to server")
@@ -118,6 +124,8 @@ async function send() {
       <h2>TCP客户端</h2>
       <div class="row">
         <input v-model="server_addr" type="text" placeholder="目标地址"/>
+        <input v-model="bind_local" type="checkbox"/> 绑定本地地址
+        <input v-if="bind_local" v-model="local_addr" type="text" placeholder="绑定地址"/>
         <button @click="start_tcp_client">连接</button>
       </div>
       <label>

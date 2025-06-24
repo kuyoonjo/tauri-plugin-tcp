@@ -7,6 +7,7 @@ Allows All
 - `allow-bind`
 - `allow-unbind`
 - `allow-connect`
+- `allow-connect-with-bind`
 - `allow-disconnect`
 - `allow-send`
 
@@ -67,6 +68,32 @@ Enables the connect command without any pre-configured scope.
 <td>
 
 Denies the connect command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`tcp:allow-connect-with-bind`
+
+</td>
+<td>
+
+Enables the connect_with_bind command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`tcp:deny-connect-with-bind`
+
+</td>
+<td>
+
+Denies the connect_with_bind command without any pre-configured scope.
 
 </td>
 </tr>
