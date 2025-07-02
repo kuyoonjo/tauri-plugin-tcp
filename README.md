@@ -90,6 +90,6 @@ add `"tcp:default"` into `"permissions"` list of `src-tauri\capabilities\default
 
 ## Support
 
-| MacOS | Linux | Windows |
-| ----- | ----- | ------- |
-| ✅    | ✅    | ✅      |
+| MacOS | Linux | Windows | Android |
+| ----- | ----- | ------- | ------- |
+| ✅    | ✅    | ✅      | ✅     |

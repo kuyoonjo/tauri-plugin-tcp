@@ -2,8 +2,7 @@ use tauri::Runtime;
 
 use crate::error::Result;
 
-#[cfg(desktop)]
-use crate::desktop as platform;
+use crate::platform;
 
 #[tauri::command]
 pub async fn bind<R: Runtime>(

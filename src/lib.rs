@@ -7,8 +7,7 @@ mod commands;
 pub mod error;
 pub mod models;
 
-#[cfg(desktop)]
-pub mod desktop;
+pub mod platform;
 
 const PLUGIN_NAME: &str = "tcp";
 
