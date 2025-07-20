@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-connect-with-bind"
+description = "Enables the connect_with_bind command without any pre-configured scope."
+commands.allow = ["connect_with_bind"]
+
+[[permission]]
+identifier = "deny-connect-with-bind"
+description = "Denies the connect_with_bind command without any pre-configured scope."
+commands.deny = ["connect_with_bind"]

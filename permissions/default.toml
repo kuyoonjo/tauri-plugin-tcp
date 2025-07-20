@@ -1,4 +1,4 @@
 "$schema" = "schemas/schema.json"
 [default]
 description = "Allows All"
-permissions = ["allow-bind", "allow-unbind", "allow-connect", "allow-disconnect", "allow-send"]
+permissions = ["allow-bind", "allow-unbind", "allow-connect", "allow-connect-with-bind","allow-disconnect", "allow-send"]

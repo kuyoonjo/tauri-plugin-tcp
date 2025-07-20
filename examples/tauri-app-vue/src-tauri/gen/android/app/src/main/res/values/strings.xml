@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">tauri-app-vue</string>
+    <string name="main_activity_title">tauri-app-vue</string>
+</resources>
