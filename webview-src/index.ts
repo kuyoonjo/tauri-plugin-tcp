@@ -27,7 +27,7 @@ export async function unbind(id: string) {
 /**
  * 
  * @param id A unique ID
- * @param endpoint e.g. 0.0.0.0:8080
+ * @param endpoint e.g. 192.168.0.100:8080
  */
 export async function connect(id: string, endpoint: string) {
   await invoke('plugin:tcp|connect', {
@@ -35,7 +35,13 @@ export async function connect(id: string, endpoint: string) {
   });
 }
 
-export async function connect_with_bind(id: string, localAddr:string, endpoint: string) {
+/**
+ * 
+ * @param id A unique ID
+ * @param localAddr e.g. 0.0.0.0:8080
+ * @param endpoint e.g. 192.168.0.100:8080
+ */
+export async function connectWithBind(id: string, localAddr:string, endpoint: string) {
   await invoke('plugin:tcp|connect_with_bind', {
     id, localAddr, endpoint,
   });

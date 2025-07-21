@@ -1,6 +1,6 @@
 {
   "name": "@kuyoonjo/tauri-plugin-tcp",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "kuyoonjo",
   "description": "",
   "type": "module",

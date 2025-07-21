@@ -1,6 +1,6 @@
+use socket2::{Domain, Socket, Type};
+use std::net::ToSocketAddrs;
 use std::{collections::HashMap, sync::Arc};
-use socket2::{Socket, Domain, Type};
-use std::net::{SocketAddr, ToSocketAddrs};
 
 use debug_print::debug_println;
 use lazy_static::lazy_static;
@@ -95,8 +95,8 @@ pub async fn connect<R: Runtime>(
 pub async fn connect_with_bind<R: Runtime>(
     window: tauri::Window<R>,
     id: String,
-    local_addr: String,   // 本地绑定地址（如：192.168.1.100:0）
-    endpoint: String,      // 远端连接地址（如：example.com:1234）
+    local_addr: String, // 本地绑定地址（如：192.168.1.100:0）
+    endpoint: String,   // 远端连接地址（如：example.com:1234）
 ) -> io::Result<()> {
     let mut sockets = SOCKETS.write().await;
 
@@ -127,7 +127,12 @@ pub async fn connect_with_bind<R: Runtime>(
     let stream = TcpStream::from_std(socket.into())?;
     let (mut read_half, write_half) = stream.into_split();
 
-    debug_println!("{} tcp connected to {} from {}", &id, &endpoint, &local_addr);
+    debug_println!(
+        "{} tcp connected to {} from {}",
+        &id,
+        &endpoint,
+        &local_addr
+    );
 
     let _ = window.app_handle().emit_to(
         window.label(),

@@ -49,7 +49,7 @@
           "minimum": 1.0
         },
         "description": {
-          "description": "Human-readable description of what the permission does. Tauri convention is to use `<h4>` headings in markdown content for Tauri documentation generation purposes.",
+          "description": "Human-readable description of what the permission does. Tauri convention is to use <h4> headings in markdown content for Tauri documentation generation purposes.",
           "type": [
             "string",
             "null"
@@ -111,7 +111,7 @@
           "type": "string"
         },
         "description": {
-          "description": "Human-readable description of what the permission does. Tauri internal convention is to use `<h4>` headings in markdown content for Tauri documentation generation purposes.",
+          "description": "Human-readable description of what the permission does. Tauri internal convention is to use <h4> headings in markdown content for Tauri documentation generation purposes.",
           "type": [
             "string",
             "null"
@@ -297,80 +297,67 @@
         {
           "description": "Enables the bind command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-bind",
-          "markdownDescription": "Enables the bind command without any pre-configured scope."
+          "const": "allow-bind"
         },
         {
           "description": "Denies the bind command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-bind",
-          "markdownDescription": "Denies the bind command without any pre-configured scope."
+          "const": "deny-bind"
         },
         {
           "description": "Enables the connect command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-connect",
-          "markdownDescription": "Enables the connect command without any pre-configured scope."
+          "const": "allow-connect"
         },
         {
           "description": "Denies the connect command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-connect",
-          "markdownDescription": "Denies the connect command without any pre-configured scope."
+          "const": "deny-connect"
         },
         {
           "description": "Enables the connect_with_bind command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-connect-with-bind",
-          "markdownDescription": "Enables the connect_with_bind command without any pre-configured scope."
+          "const": "allow-connect-with-bind"
         },
         {
           "description": "Denies the connect_with_bind command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-connect-with-bind",
-          "markdownDescription": "Denies the connect_with_bind command without any pre-configured scope."
+          "const": "deny-connect-with-bind"
         },
         {
           "description": "Enables the disconnect command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-disconnect",
-          "markdownDescription": "Enables the disconnect command without any pre-configured scope."
+          "const": "allow-disconnect"
         },
         {
           "description": "Denies the disconnect command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-disconnect",
-          "markdownDescription": "Denies the disconnect command without any pre-configured scope."
+          "const": "deny-disconnect"
         },
         {
           "description": "Enables the send command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-send",
-          "markdownDescription": "Enables the send command without any pre-configured scope."
+          "const": "allow-send"
         },
         {
           "description": "Denies the send command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-send",
-          "markdownDescription": "Denies the send command without any pre-configured scope."
+          "const": "deny-send"
         },
         {
           "description": "Enables the unbind command without any pre-configured scope.",
           "type": "string",
-          "const": "allow-unbind",
-          "markdownDescription": "Enables the unbind command without any pre-configured scope."
+          "const": "allow-unbind"
         },
         {
           "description": "Denies the unbind command without any pre-configured scope.",
           "type": "string",
-          "const": "deny-unbind",
-          "markdownDescription": "Denies the unbind command without any pre-configured scope."
+          "const": "deny-unbind"
         },
         {
-          "description": "Allows All\n#### This default permission set includes:\n\n- `allow-bind`\n- `allow-unbind`\n- `allow-connect`\n- `allow-connect-with-bind`\n- `allow-disconnect`\n- `allow-send`",
+          "description": "Allows All",
           "type": "string",
-          "const": "default",
-          "markdownDescription": "Allows All\n#### This default permission set includes:\n\n- `allow-bind`\n- `allow-unbind`\n- `allow-connect`\n- `allow-connect-with-bind`\n- `allow-disconnect`\n- `allow-send`"
+          "const": "default"
         }
       ]
     }

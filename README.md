@@ -41,7 +41,9 @@ await unbind(sid);
 
 // Client side
 const cid = 'unique-client-id';
-await connect(cid, '0.0.0.0:8080');
+await connect(cid, '192.168.0.100:8080');
+// Alternatively
+// await connectWithBind(cid, '0.0.0.0:9090', '192.168.0.100:8080');
 await listen((x) => {
   console.log(x.payload);
   if (x.payload.id === cid && x.payload.event.message) {
@@ -93,3 +95,9 @@ add `"tcp:default"` into `"permissions"` list of `src-tauri\capabilities\default
 | MacOS | Linux | Windows | Android |
 | ----- | ----- | ------- | ------- |
 | ✅    | ✅    | ✅      | ✅     |
+
+## Changelog
+
+### v0.1.2
+- Add function `connectWithBind`
+- Add Android support
